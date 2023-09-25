@@ -38,9 +38,18 @@
             $pass="";
             $host="localhost";
             $conn=mysqli_connect($host,$user,$pass,$baza);
-
-                $dane=$_POST['dane'];
-                $query=mysqli_query($conn,'SELECT nazwa,ulica From kwiaciarnie WHERE miasto=$dane');
+            $dane = $_POST['dane'];  
+            if(isset($dane))
+             {
+                
+                
+                $kwerenda = "SELECT nazwa, ulica FROM kwiaciarnie WHERE miasto = '$dane';";
+                $query = mysqli_query($conn, $kwerenda);
+                while ($row = mysqli_fetch_array($query)) {
+                    echo "$row[0], $row[1]";
+                }
+            }
+                
 
 
             mysqli_close($conn);
